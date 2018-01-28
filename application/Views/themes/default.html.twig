@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %} </title>
+    <link rel="stylesheet" href="/public/assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/public/css/app.css">
+	  
+	<link rel="stylesheet" href="/public/assets/twiggy/simplemde.min.css">
+	<!--<script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>-->
+  </head>
+  <body id="twiggy">
+	<nav class="navbar navbar-light bg-light-o fixed-top" role="navigation">
+	  <a class="navbar-brand">
+		<img src="/public/logo.png" width="102" height="30">
+	  </a>
+
+	  <div class="navbar-item">
+
+		<ul class="drop">
+		  <li><a><i class="fas fa-bars"></i> Menu</a>
+			<ul>
+			  <li><a data-target=".masuk" data-toggle="modal"><i class="fas fa-login"></i> Masuk</a></li>
+			  <li><a data-target=".daftar" data-toggle="modal">Daftar</a></li>
+			  <li><a>Discussion</a></li>
+			  <li><a>About us</a></li>
+
+			</ul>
+		  </li>
+		</ul>
+
+	  </div>
+	</nav>
+
+    {% block content %} {% endblock %}
+  	
+	<footer class="footer">
+	  <div class="content">indonesian introvert community <br> &copy; 2018 </div>
+	</footer>
+
+{% block foot %}
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="/public/assets/js/bootstrap.min.js"></script>
+	<script src="/public/assets/js/initial.min.js"></script>
+	<script src="/public/assets/twiggy/simplemde.min.js"></script>
+	
+	
+    
+{% endblock %}
+  </body>
+</html>

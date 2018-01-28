@@ -1,0 +1,25 @@
+
+{{ "# marrkkk"|markdown }}
+
+{{ "
+# testaj
+
+**tesss**
+
+<script>alert('aa')</script>"|markdown|e }}
+
+
+{% for user in users %}
+
+	Namanya {{ user.name }} <br>
+    Usernamenya {{ user.username }} user yang ke {{ user.id }}
+    <hr>
+{% endfor %}
+<hr>
+
+<form action='home/request' method='post'>
+
+	<input type="text" name="name"/>
+
+<input type='submit' value='submit'>
+</form>
