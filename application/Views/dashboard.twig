@@ -1,0 +1,61 @@
+{% extends "themes/app.twig" %}
+
+{% block title "Profile" %}
+
+{% block content %}
+  <div class="wrapper">
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          
+          
+          
+          <div class="menus">
+            <a href="#" class="menu-item">Discussion</a>
+            <a href="#" class="menu-item">Profile</a>
+            <a href="#" class="menu-item">Gists</a>
+            
+            <a href="#" class="menu-item">Setting</a>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="none">
+            <div class="container">
+              <div class="row">
+                
+                
+                <div class="col-md-4">
+                <div class="card with-padding clearfix" style="margin:5px -25px">
+                  <img src="/public/head.jpg" alt="" height=100px width=100px style="float:left;margin-right:15px">
+            <strong>Akrin Min</strong><br>
+            <span class="text-muted" style="font-size:9px">Pekalongan</span><br>
+            <a href="#">http://akrindev.me</a>
+            </div>
+                </div>
+                
+                
+                <div class="col-md-8">
+                  <div class="card with-padding" style="margin:10px -25px">
+                    <h4>last activity</h4>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  
+  {% endblock %}
+
+  
+{% block footer %}
+
+  {{ parent() }}
+  <script src="/public/assets/js/app.login.js"></script>
+{% endblock %}

@@ -31,6 +31,8 @@ $routes->discoverLocal(false);
 $routes->add('/', 'Home::index');
 $routes->get('/login', 'Home::login');
 $routes->get('/register', 'Home::register');
+$routes->get('/profile', 'Home::profile');
+$routes->get('/logout', 'Home::logout');
 
 /**
  * --------------------------------------------------------------------

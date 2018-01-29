@@ -3,39 +3,67 @@
 namespace App\Controllers;
 
 use CodeIgniter\Controller;
-//use App\Models\User;
-//use CodeIgniter\HTTP\RequestInterface;
-use Twig_Loader_Filesystem as tw;
-use Twig_Environment as te;
 use App\Auth\Auth;
 
-use Aptoma\Twig\Extension\MarkdownExtension;
-use Aptoma\Twig\Extension\MarkdownEngine;
 
 
 class Home extends Controller
 {
+
   	protected $twig;
+  	protected $auth;
   
   	public function __construct()
     {
-      $loader = new tw(APPPATH.'Views');
-      $this->twig = new te($loader);
+      if(! isset($_SESSION))
+      	session()->start();
       
-	  $engine = new 	MarkdownEngine\MichelfMarkdownEngine();
-
-	  $this->twig->addExtension(new MarkdownExtension($engine));
+      $this->twig = Service('twig');
+      $this->auth = new Auth;
+    }
+  
+  	public function index()
+    {
+      
+      $a = new Auth;
+      echo $a->isLogin();
+      
+    }
+  
+  	public function profile()
+    {
+      if(!$this->auth->isLogin())
+        return redirect('login');
+      
+      return $this->twig->render('dashboard.twig');
     }
   
 	public function login()
 	{
-    	return $this->twig->render('login.twig',[]);
+      
+      if($this->auth->isLogin())
+        return redirect('profile');
+      
+      return $this->twig->render('login.twig');
 	}
   
   
 	public function register()
 	{
+      if($this->auth->isLogin())
+        return redirect('profile');
+      
     	return $this->twig->render('register.twig',[]);
 	}
+  
+  	public function logout()
+    {
+      if(!$this->auth->isLogin())
+        return redirect('login');
+      
+      $this->auth->logout();
+      
+      return redirect('login');
+    }
   
 }

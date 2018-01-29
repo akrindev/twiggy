@@ -4,25 +4,48 @@ namespace App\Controllers;
 
 use CodeIgniter\Controller;
 use App\Models\User;
-//use CodeIgniter\HTTP\RequestInterface;
-//use Twig_Loader_Filesystem as tw;
-//use Twig_Environment as te;
 use App\Auth\Auth;
-
-//use Aptoma\Twig\Extension\MarkdownExtension;
-//use Aptoma\Twig\Extension\MarkdownEngine;
 
 
 class Api extends Controller
 {
  
+  
   	public function login()
     {
+      
+      $validate = $this->validate([
+      	'email' => [
+        	'label' => 'Email',
+            'rules' => 'required|valid_email'
+        ],
+        'password' => [
+        	'label' => 'password',
+            'rules' => 'required|min_length[6]'
+        ]
+      ]);
+      
+      $err = $this->validator->getErrors();
+      
       $response = [
-      	'status' => true,
-        'email' => $this->request->getPost('email'),
-        'password' => $this->request->getPost('password')
+      	'validation' => $validate,
+        'errors' => $err,
+        'status' => false
       ];
+      
+      if($validate)
+      {
+        $check = new Auth;
+        $check->attempt(
+          		$this->request->getPost('email'),
+          		$this->request->getPost('password')
+        );
+        
+        if($check)
+        {
+          $response['status'] = true;
+        }
+      }
       
       $this->response
         	->setStatusCode(200)
