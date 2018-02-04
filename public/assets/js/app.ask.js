@@ -15,22 +15,24 @@ $("form").submit(function(e){
     dataType: 'json',
     beforeSend: function(){
       
-	  $("#notify").html("<div class='alert alert-info'>Authenticating . . .</div>").slideDown('slow');
+	  $("#notify").html("<div class='alert alert-info'>Publishing . . .</div>").slideDown('slow');
     },
     success: function(r){
       if(r.validation){
-      if(r.status === true){
+        
+      	if(r.status){
       
-	  $("#notify").html("<div class='alert alert-success'>Successfully . . .</div>");
+	  		$("#notify").html("<div class='alert alert-success'>Successfully, redirecting . . .</div>");
         
-      setTimeout(function(){
-        window.location.href = '/profile';
-      },2000);
-      } else {
+      		setTimeout(function(){
+        		window.location.href = '/profile';
+      		},2000);
+      	} else {
         
-	  $("#notify").html("<div class='alert alert-danger'>Email or password doesnt match</div>");
+	  		$("#notify").html("<div class='alert alert-danger'>Failed!!</div>");
         
-      }
+      	}
+        
       } else {
         
 	  $("#notify").html("<div class='alert alert-danger'>Ups!! something goes wrong</div>");
