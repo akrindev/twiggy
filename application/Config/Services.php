@@ -23,7 +23,35 @@ class Services extends CoreServices
 	   $engine = new \Aptoma\Twig\Extension\MarkdownEngine\MichelfMarkdownEngine();
 
 	   $twig->addExtension(new \Aptoma\Twig\Extension\MarkdownExtension($engine));
+       
+       $auth = new \Twig_Function('auth', function() {
+       $isauth = new \App\Auth\Auth;
+       if($isauth->isLogin())
+       {
+         return true;
+       } else {
+         return false;
+       }
+         
+       });
      
+       $tags = new \Twig_Function('tags', function ($v) {
+       		$ex = explode(',',$v);
+         	$data = '';
+         
+         	for($i=0;$i < count($ex);$i++)
+            {
+              $data .= "<span class='label label-info'>";
+              $data .= $ex[$i];
+              $data .= "</span> &nbsp;";
+           	  if($i == 3) break;
+            }
+         
+         return $data;
+       });
+     
+       $twig->addFunction($tags);
+       $twig->addFunction($auth);
        return $twig;
    }
 

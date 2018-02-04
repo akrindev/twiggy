@@ -4,8 +4,7 @@ namespace App\Controllers;
 
 use CodeIgniter\Controller;
 use App\Auth\Auth;
-
-
+use App\Models\Discuss;
 
 class Home extends Controller
 {
@@ -24,46 +23,38 @@ class Home extends Controller
   
   	public function index()
     {
+      $discusses = Discuss::all();
+    //  print_r($discusses);
       
-      $a = new Auth;
-      echo $a->isLogin();
+      return $this->twig->render('discuss.twig',[
+      	'discusses' => $discusses
+      ]);
       
     }
   
-  	public function profile()
+  	public function topic($slug)
     {
-      if(!$this->auth->isLogin())
-        return redirect('login');
+      $discuss = Discuss::where('slug',$slug)->get();
       
-      return $this->twig->render('dashboard.twig');
+      if($discuss->count() === 0)
+      {
+        return redirect('/notfound');
+      }
+     // print_r($discuss);
+      return $this->twig->render('discuss_topic.twig',[
+      	'discuss' => $discuss
+      ]);
     }
   
-	public function login()
-	{
-      
-      if($this->auth->isLogin())
-        return redirect('profile');
-      
-      return $this->twig->render('login.twig');
-	}
   
-  
-	public function register()
-	{
-      if($this->auth->isLogin())
-        return redirect('profile');
-      
-    	return $this->twig->render('register.twig',[]);
-	}
-  
-  	public function logout()
+  	public function tanya()
     {
+      
       if(!$this->auth->isLogin())
-        return redirect('login');
-      
-      $this->auth->logout();
-      
-      return redirect('login');
+        return redirect('/login');
+      return $this->twig->render('discuss_ask.twig');
     }
   
+  	
+
 }

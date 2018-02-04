@@ -9,4 +9,14 @@ class User extends Model
   public $fillable = [
   	'name', 'username', 'email', 'password'
   ];
+  
+  public function discuss()
+  {
+    return $this->hasMany('App\Models\Discuss');
+  }
+  
+  public function comments()
+  {
+    return $this->hasMany('App\Models\Comment');
+  }
 }

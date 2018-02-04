@@ -1,0 +1,102 @@
+{% extends "themes/app.twig" %}
+
+
+{% block title "Twiggy.us" %}
+
+{% block content %}
+<section class="section">
+	  <div class="container hero">
+		<strong>Selamat datang di planet baru vert!</strong>
+		<br/>
+		<small> belum tau apa itu introvert? yuk simak dulu <a class="">disini</a> </small>
+	  </div>
+      
+	  <div class="container-fluid discusi">
+      
+        {% for discus in discuss %}
+		<div class="topic-name">
+		  {{ discus.topic }} <br>
+          {{ tags(discus.tags)|raw }}
+		</div>
+        
+		<div class="post-info">
+	<img data-name="{{ discus.user.name }}" class="avatar" width=30 height=30>
+	  <strong>{{ discus.user.name }} </strong> <small class="text-muted">@{{ discus.user.username }} </small>
+		<br/>
+		  <small class="text-muted">{{ discus.created_at }} </small>
+		</div>
+	  
+	  
+	  <div class="post-body">
+		{{ discus.body|markdown }}
+		<div class="postattr">
+		  <font color="red"> &hearts;</font> like this? 
+		</div>
+	  </div>
+        {% endfor %}
+	  </div>
+	  
+	  <div class="comments">
+        
+		
+		<div class="comment">
+		  <div class="comment-meta">
+			<div class="userpost">
+			  <img data-name="AkrinMin" class="avatar" width=30 height=30>
+			  <strong>Akrin min</strong>
+			  <br/>
+			  <small class="text-muted">januari 22,2018</small>
+			</div>
+		  </div>
+		  <div class="comment-body">
+			
+			<div class="quoted">
+			  <span><b>akrin</b></span> said:
+			  
+			  <br/><br>
+			  ypoo okkaaii nnppppp
+			</div>
+			
+			hhgggb hjjjknbvg
+			jkkkkkkkkkkkjvgyy
+			jjhh
+			
+			<div class="commentattr">
+			  <a class="text-primary">quote</a>
+			</div>
+		  </div>
+		  
+		  
+		</div>
+	 
+	  </div>
+	  <div class="">
+		<ul class="pagination pagination-sm">
+		  <li class="active"><a class="">1</a></li>
+		  <li class=""><a class="">2</a></li>
+		  <li class=""><a class="">3</a></li>
+		</ul></div>
+	 
+		
+		 <div class="form-comment">
+           
+           <form action="/api/comment">
+           <div class="form-group">
+             <label>Comment</label>
+             {% for d in discuss %}
+             <input type="hidden" name="parent" value="{{ d.id }}">
+             {% endfor %}
+		     <textarea id="teet" rows=4 name="body" class="form-control"></textarea>
+             </div>
+		<button type="submit" class="btn btn-primary btn-sm">Comment</button>
+         </form>  
+           
+	  </div>
+	</section>
+{% endblock %}
+
+{% block footer %}
+  {{ parent() }}
+  <script src="/public/assets/js/initial.min.js"></script>
+<script src="/public/assets/js/app.discuss.js"></script>
+{% endblock %}

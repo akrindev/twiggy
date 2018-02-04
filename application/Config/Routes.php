@@ -29,10 +29,12 @@ $routes->discoverLocal(false);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->add('/', 'Home::index');
-$routes->get('/login', 'Home::login');
-$routes->get('/register', 'Home::register');
-$routes->get('/profile', 'Home::profile');
-$routes->get('/logout', 'Home::logout');
+$routes->get('/topic/(:any)', 'Home::topic/$1');
+$routes->get('/login', 'User::login');
+$routes->get('/register', 'User::register');
+$routes->get('/profile', 'User::index');
+$routes->get('/logout', 'User::logout');
+$routes->get('/tanya', 'Home::tanya');
 
 /**
  * --------------------------------------------------------------------

@@ -1,0 +1,95 @@
+{% extends "themes/app.twig" %}
+
+{% block title "Ask" %}
+
+{% block head %}
+  {{ parent() }}
+
+<link rel="stylesheet" href="/public/assets/css/simplemde.min.css">
+{% endblock %}
+
+{% block content %}
+  <div class="wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <div class="panel panel-default">
+            <div class="panel-heading">Saya mau bertanya</div>
+            <div class="panel-body">
+            
+              <div id="notify"></div>
+               <form action="/api/ask" method="post">
+                 <div class="form-group">
+                   <label for="">Topic</label>
+                   <input type="text" id="topic" name="topic" class="form-control" placeholder="your email">
+                 </div>
+                 
+                 <div class="form-group">
+                   <label for="">Apa yang terjadi?</label>
+          <textarea name="body" id="body" rows="5" class="form-control"></textarea>
+                 </div>
+                 
+                 <div class="form-group">
+                   <label for="tags">tags</label>
+                   <input type="text" name="tags" class='form-control' placeholder='pisah dengan coma (max 5 tags)'>
+                 </div>
+                 
+                 <button type="submit" class="btn btn-default btn-block">Publish</button>
+               </form>
+            
+            </div>
+          </div>
+        </div>
+        
+     
+        <div class="col-md-8 col-md-offset-2">
+          <div class="panel panel-default">
+            <div class="panel-heading">Markdown Guide</div>
+            <div class="panel-body">
+            <h4>Emphasis</h4>
+<pre>**<strong>bold</strong>**
+*<em>italics</em>*
+~~<strike>strikethrough</strike>~~</pre>
+<h4>Headers</h4>
+<pre># Big header
+## Medium header
+### Small header
+#### Tiny header</pre>
+<h4>Lists</h4>
+<pre>* Generic list item
+* Generic list item
+* Generic list item
+
+1. Numbered list item
+2. Numbered list item
+3. Numbered list item</pre>
+<h4>Links</h4>
+<pre>[Text to display](http://www.example.com)</pre>
+
+<h4>Images &nbsp; <small>Need to upload an image? <a href="http://imgur.com/" target="_blank">Imgur</a> has a great interface.</small></h4>
+<pre>![](http://www.example.com/image.jpg)</pre>
+              
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  </div>
+  
+  {% endblock %}
+
+  
+{% block footer %}
+
+  {{ parent() }}
+  <script src="/public/assets/js/simplemde.min.js"></script>
+  <script src="/public/assets/js/app.ask.js"></script>
+
+<script>
+var simplemde = new SimpleMDE({ element: document.getElementById("bodytext"),
+                               toolbar: ["bold", "italic", "ordered-list", "heading", "image", "link"],
+                              });
+</script>
+{% endblock %}

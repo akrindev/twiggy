@@ -18,7 +18,7 @@ class Auth
       $this->isLogin = false;
     }
   
-  	public function attempt($email, $password)
+  	public function attempt($email, $password): bool
     {
       $u = User::where('email',$email)->first();
       

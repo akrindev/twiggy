@@ -1,0 +1,48 @@
+{% extends "themes/app.twig" %}
+
+{% block title "Login" %}
+
+{% block content %}
+  <div class="wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12" style="color:#fff"><p><strong>Welcome to twiggy discussion</strong><br>Twiggy adalah forum diskusi untuk introvert
+        </p>
+        <a href="/tanya" style="padding:5px 15px;color#fff;background:#3541b5;color:#fff;margin-top:10px">tanya</a>
+        </div>
+      
+      <div class="col-md-12">
+        <div class="explode">
+          
+          {% for discuss in discusses %}
+           
+          
+          <div class="topics"><a href="/topic/{{ discuss.slug }}">
+            {{ discuss.topic|raw }}
+            <span class="meta-time">{{ discuss.user.username }} . {{ discuss.created_at }}</span>
+             {{ tags(discuss.tags)|raw }} 
+            </a>
+          </div>
+          {% endfor %}
+          </div>
+        
+        <ul class="pagination pagination-sm">
+          <li class="k active"><a href="">1</a></li>
+          <li class="k"><a href="">2</a></li>
+          <li class="k"><a href="">3</a></li>
+          <li class="k"><a href="">4</a></li>
+          <li class="k"><a href="">5</a></li>
+        </ul>
+        </div>
+      </div>
+     </div>
+  </div>
+  
+  {% endblock %}
+
+  
+{% block footer %}
+
+  {{ parent() }}
+  <script src="/public/assets/js/app.login.js"></script>
+{% endblock %}
