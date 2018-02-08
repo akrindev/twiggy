@@ -39,7 +39,8 @@ class Auth
         session()->set($setSession);
         
         $this->loginHistoryWrite();
-       $this->isLogin = session()->logged_in;
+       	$this->isLogin = session()->logged_in;
+        
         return true;
       }
       
@@ -57,6 +58,11 @@ class Auth
       }
       
       return true;
+    }
+  
+  	public function getUser(): int
+    {
+      return session('user') ?? 0;
     }
   
   	public function logout()
