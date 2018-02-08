@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Karla|Lato');
+
 html{
   min-height:100%;
   position:relative;
@@ -12,13 +14,14 @@ footer{
   bottom:0;
   width:100%;
   height:60px;
-  padding-top:20px;
+  padding-top:10px;
   border-top:1px solid #007aff;
-  background-color:#fff
+  background-color:#fff;
+  
 }
 .wrapper
 {
-  margin:10px 0;
+  margin:10px auto;
 }
 @media (min-width: 768px) {
   .wrapper {
@@ -35,13 +38,56 @@ footer{
     width: 1170px;
   }
 }
+.explode {
+  margin:15px 0;
+}
+@media (min-width: 360px) {
+  .explode {
+    padding:-25px;
+  }
+}
+@media (min-width: 760px) {
+  .explode {
+    padding:0;
+  }
+}
+.topics 
+{
+  margin:1px -15px;
+ 
+}
+.topics a
+{
+  font-family:'Karla',Arial,serif;
+  font-size: 13px;
+  display:block;
+  background: #fff;
+  padding:8px 10px;
+  color:#444;
+}
+.topics a:hover, .topics a:active {
+  border-left:5px solid #3541b2;
+  text-decoration:none;
+  
+}
+.meta-time {
+  display:block;
+  color:#aaa;
+    font-size: 9px;
+}
 .navbar-toggle
 {
   border:none;
 }
+.navbar
+{
+  border:none;
+}
+
 
 .navbar-blue {
   background-color: #fff;
+  border-top:3px solid #4b79cf;
   box-shadow:1px 0 5px #007aff;
 }
 .navbar-blue .navbar-brand {
@@ -148,9 +194,34 @@ fieldset[disabled] .navbar-blue .btn-link:focus {
   -o-animation:MoveBG 60s ease infinite;
   animation:MoveBG 60s ease infinite;
 }
+
+.discusi
+{
+  margin:10px 0;
+  padding:5px;
+  background: #fff;
+  font-family:'Karla',serif;
+}
+.topic-name, .post-info,.post-body,.postattr
+{
+  display:block;
+  padding:5px 10px;
+}
+.topic-name {
+  word-wrap:break-word;
+  border-bottom:1px solid #aaa;
+  font-size:14px;
+  font-weight: bold;
+}
+.post-body {
+  font-size:12px;
+  word-wrap: break-word;
+  padding-bottom:8px;
+}
 .hero
 {
   color:#fff;
+  font-family:'Lato',serif;
   text-align:center;
 }
 .hero a
@@ -267,20 +338,29 @@ fieldset[disabled] .navbar-blue .btn-link:focus {
 {
   background-color:#fff;
   margin-bottom:5px;
-  border-bottom:1px solid #eee;
-  padding-bottom:5px;
+  font-family:'Karla',serif;
+  padding-bottom:0px;
 }
 
-.comment-meta
+.comment-meta, .post-info
 {
   display:block;
   margin-bottom:3px;
   padding:5px 0;
+  font-size:12px
+}
+.post-info {
+  padding: 5px 10px;
 }
 
 .comment
 {
   border-top:1px solid #eee;
+  padding:7px;
+}
+.comment-body {
+  word-wrap: break-word;
+  font-size: 11px;
 }
 .commentattr
 {
@@ -296,8 +376,8 @@ fieldset[disabled] .navbar-blue .btn-link:focus {
 
 .form-comment
 {
-  margin-top:30px;
-  margin-bottom:50px;
+  margin-top:0px;
+  margin-bottom:110px;
   border-top:1px solid #eee;
   padding:10px;
   background-color:#fff;
@@ -324,14 +404,18 @@ fieldset[disabled] .navbar-blue .btn-link:focus {
   display:block
 }
 
-.pager
-{
-  margin:20px 10px;
+textarea.form-control {
   border-radius:0;
+  padding:5px;
+  font-size: 12px;
 }
 
 
-
+.avatar {
+  float:left;
+  margin-right:7px ;
+  display:inline-block
+}
 /**
 * custom color
 **/
