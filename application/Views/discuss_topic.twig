@@ -4,16 +4,16 @@
 {% block title "Twiggy.us" %}
 
 {% block content %}
+<div class="wrapper">
 <section class="section">
 	  <div class="container hero">
-		<strong>Selamat datang di planet baru vert!</strong>
+		<strong>Welcome to twiggy</strong>
 		<br/>
-		<small> belum tau apa itu introvert? yuk simak dulu <a class="">disini</a> </small>
+		<small> Twiggy adalah forum komunitas introvert indonesia</small>
 	  </div>
       
 	  <div class="container-fluid discusi">
       
-        {% for discus in discuss %}
 		<div class="topic-name">
 		  {{ discus.topic }} <br>
           {{ tags(discus.tags)|raw }}
@@ -23,7 +23,7 @@
 	<img data-name="{{ discus.user.name }}" class="avatar" width=30 height=30>
 	  <strong>{{ discus.user.name }} </strong> <small class="text-muted">@{{ discus.user.username }} </small>
 		<br/>
-		  <small class="text-muted">{{ discus.created_at }} </small>
+		  <small class="text-muted">{{ discus.created_at }} {% if auth('user') == discus.user_id %} . <a href="/discuss/{{ discus.slug }}/edit">edit</a> {% endif %} </small>
 		</div>
 	  
 	  
@@ -33,34 +33,25 @@
 		  <font color="red"> &hearts;</font> like this? 
 		</div>
 	  </div>
-        {% endfor %}
+        
 	  </div>
 	  
+  {% if comments %}
 	  <div class="comments">
-        
+      {% for comment in comments %}
 		
 		<div class="comment">
 		  <div class="comment-meta">
 			<div class="userpost">
-			  <img data-name="AkrinMin" class="avatar" width=30 height=30>
-			  <strong>Akrin min</strong>
+			  <img data-name="{{ comment.user.name}}" class="avatar" width=30 height=30>
+			  <strong>{{ comment.user.name }} </strong>
 			  <br/>
-			  <small class="text-muted">januari 22,2018</small>
+			  <small class="text-muted">{{ comment.created_at }} </small>
 			</div>
 		  </div>
 		  <div class="comment-body">
 			
-			<div class="quoted">
-			  <span><b>akrin</b></span> said:
-			  
-			  <br/><br>
-			  ypoo okkaaii nnppppp
-			</div>
-			
-			hhgggb hjjjknbvg
-			jkkkkkkkkkkkjvgyy
-			jjhh
-			
+            {{ comment.body|markdown }}
 			<div class="commentattr">
 			  <a class="text-primary">quote</a>
 			</div>
@@ -69,30 +60,41 @@
 		  
 		</div>
 	 
+        {% endfor %}
 	  </div>
-	  <div class="">
+  {% endif %}
+  
+	  <div style="margin-left:10px;">
 		<ul class="pagination pagination-sm">
 		  <li class="active"><a class="">1</a></li>
 		  <li class=""><a class="">2</a></li>
 		  <li class=""><a class="">3</a></li>
 		</ul></div>
 	 
-		
+		{% if auth() %}
 		 <div class="form-comment">
            
-           <form action="/api/comment">
+           <form action="/api/comment" method="post">
            <div class="form-group">
              <label>Comment</label>
-             {% for d in discuss %}
-             <input type="hidden" name="parent" value="{{ d.id }}">
-             {% endfor %}
-		     <textarea id="teet" rows=4 name="body" class="form-control"></textarea>
+             
+             <input type="hidden" name="parent" value="{{ discus.id }}">
+            
+		     <textarea id="body" rows=4 name="body" class="form-control"></textarea>
              </div>
 		<button type="submit" class="btn btn-primary btn-sm">Comment</button>
          </form>  
            
 	  </div>
+  
+    {% else %}
+  
+  <div class="container"><a href="/login" class="btn btn-default btn-block">Login to comment</a></div>
+  
+    {% endif %}
+  <div class="separator" style="margin:75px"></div>
 	</section>
+  </div>
 {% endblock %}
 
 {% block footer %}
