@@ -29,14 +29,15 @@
           </div>
           {% endfor %}
           </div>
+      {% if pagination.needed %}
         
-        <ul class="pagination pagination-sm">
-          <li class="k active"><a href="">1</a></li>
-          <li class="k"><a href="">2</a></li>
-          <li class="k"><a href="">3</a></li>
-          <li class="k"><a href="">4</a></li>
-          <li class="k"><a href="">5</a></li>
-        </ul>
+    <ul class="pagination pagination-sm">
+        {% for i in 1..pagination.lastpage %}
+            <li class="{% if i == pagination.page %}active{% endif %}"><a href="?page={{ i }}">{{ i }}</a></li>
+        {% endfor %}
+    </ul>
+      {% endif %}
+        
         </div>
       </div>
      </div>
