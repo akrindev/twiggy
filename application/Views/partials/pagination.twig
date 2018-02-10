@@ -1,0 +1,6 @@
+
+    <ul class="pagination pagination-sm">
+        {% for i in 1..pagination.lastpage %}
+            <li class="{% if i == pagination.page %}active{% endif %}"><a href="?page={{ i }}">{{ i }}</a></li>
+        {% endfor %}
+    </ul>
