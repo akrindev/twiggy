@@ -25,20 +25,29 @@ class Home extends Controller
   
   	public function index()
     {
-      $page = $this->request->getGet('page') === '' 
+      $page = (int) $this->request->getGet('page') === '' 
         	? 1
         	: $this->request->getGet('page') > 0 
               ? $this->request->getGet('page') 
               : 1 ;
       
       $limit     = 2; // Number of posts on one page
-      $skip      = ($page - 1) * $limit;
-      $count     = Discuss::all()->count(); 
+      $skip      = (int) ($page - 1) * $limit;
+      $count     = (int) Discuss::all()->count();
+      $lastpage  = (int) (ceil($count / $limit) == 0 ? 1 : ceil($count / $limit));
+      
+      //if ?page= is greater than lastpage
+      if($page > $lastpage)
+      {
+        //asign page to the lastpage
+       	$page = $lastpage;
+      }
+      
       $pagination = [
             'needed'        => $count > $limit,
           //'count'         => $count,
             'page'          => $page,
-            'lastpage'      => (ceil($count / $limit) == 0 ? 1 : ceil($count / $limit)),
+            'lastpage'      => $lastpage,
           //'limit'         => $limit,
         ];
       
@@ -52,16 +61,16 @@ class Home extends Controller
   
   	public function topic($slug)
     {
+      //get slug
       $discuss = Discuss::where('slug','=',$slug)->first();
+      //get comment topic
       $comments = $discuss->comments;
       
+      //if topic not found
       if($discuss->count() === 0)
       {
         return redirect('/notfound');
-      }
-     	//print_r($discuss);
-      
-        
+      } 
       
      return $this->twig->render('discuss_topic.twig',[
       	'discus' => $discuss,
@@ -73,9 +82,10 @@ class Home extends Controller
   
   	public function tanya()
     {
-      
+      //must login
       if(!$this->auth->isLogin())
         return redirect('/login');
+      
       return $this->twig->render('discuss_ask.twig');
     }
   
