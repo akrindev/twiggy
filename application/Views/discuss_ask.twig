@@ -5,7 +5,6 @@
 {% block head %}
   {{ parent() }}
 
-<link rel="stylesheet" href="/public/assets/css/simplemde.min.css">
 {% endblock %}
 
 {% block content %}
@@ -21,11 +20,13 @@
                <form action="/api/ask" method="post">
                  <div class="form-group">
                    <label for="">Topic</label>
-                   <input type="text" id="topic" name="topic" class="form-control" placeholder="your email">
+                   <input type="text" id="topic" name="topic" class="form-control" placeholder="Topic title">
                  </div>
                  
                  <div class="form-group">
                    <label for="">Apa yang terjadi?</label>
+            {% include 'partials/text.twig' %}
+             
           <textarea name="body" id="body" rows="5" class="form-control"></textarea>
                  </div>
                  
@@ -84,12 +85,7 @@
 {% block footer %}
 
   {{ parent() }}
-  <script src="/public/assets/js/simplemde.min.js"></script>
+ 
   <script src="/public/assets/js/app.ask.js"></script>
 
-<script>
-var simplemde = new SimpleMDE({ element: document.getElementById("bodytext"),
-                               toolbar: ["bold", "italic", "ordered-list", "heading", "image", "link"],
-                              });
-</script>
 {% endblock %}

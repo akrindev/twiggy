@@ -1,6 +1,6 @@
 {% extends "themes/app.twig" %}
 
-{% block title "Login" %}
+{% block title "twiggy discussions" %}
 
 {% block content %}
   <div class="wrapper">
@@ -29,15 +29,10 @@
           </div>
           {% endfor %}
           </div>
-      {% if pagination.needed %}
-        
-    <ul class="pagination pagination-sm">
-        {% for i in 1..pagination.lastpage %}
-            <li class="{% if i == pagination.page %}active{% endif %}"><a href="?page={{ i }}">{{ i }}</a></li>
-        {% endfor %}
-    </ul>
-      {% endif %}
-        
+          
+        {% include 'partials/pagination.twig' with pagination %}
+      
+      
         </div>
       </div>
      </div>

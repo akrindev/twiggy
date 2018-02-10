@@ -1,21 +1,19 @@
 {% extends "themes/app.twig" %}
 
 
-{% block title "Twiggy.us" %}
+{% block title discus.topic %}
 
 {% block content %}
 <div class="wrapper">
 <section class="section">
 	  <div class="container hero">
-		<strong>Welcome to twiggy</strong>
-		<br/>
-		<small> Twiggy adalah forum komunitas introvert indonesia</small>
+        <strong> {{ discus.topic }} </strong>
 	  </div>
       
 	  <div class="container-fluid discusi">
       
 		<div class="topic-name">
-		  {{ discus.topic }} <br>
+		 
           {{ tags(discus.tags)|raw }}
 		</div>
         
@@ -44,7 +42,7 @@
 		  <div class="comment-meta">
 			<div class="userpost">
 			  <img data-name="{{ comment.user.name}}" class="avatar" width=30 height=30>
-			  <strong>{{ comment.user.name }} </strong>
+			  <strong>{{ comment.user.name }} </strong> <small class="text-muted">@{{ comment.user.username }} </small>
 			  <br/>
 			  <small class="text-muted">{{ comment.created_at }} </small>
 			</div>
@@ -76,13 +74,16 @@
            
            <form action="/api/comment" method="post">
            <div class="form-group">
-             <label>Comment</label>
+             <label>Answer</label>
+             
+            {% include 'partials/text.twig' %}
              
              <input type="hidden" name="parent" value="{{ discus.id }}">
             
-		     <textarea id="body" rows=4 name="body" class="form-control"></textarea>
+		     <textarea id="subject_textarea" rows=4 name="body" class="form-control"></textarea>
+            <small> <span class="help-block">Markdown supported</span></small>
              </div>
-		<button type="submit" class="btn btn-primary btn-sm">Comment</button>
+		<button type="submit" class="btn btn-primary btn-sm">Post answer</button>
          </form>  
            
 	  </div>
@@ -99,6 +100,9 @@
 
 {% block footer %}
   {{ parent() }}
+
+  <script src="/public/assets/js/app.textarea.js"></script>
   <script src="/public/assets/js/initial.min.js"></script>
 <script src="/public/assets/js/app.discuss.js"></script>
+
 {% endblock %}
