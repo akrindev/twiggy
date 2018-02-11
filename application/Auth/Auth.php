@@ -18,20 +18,23 @@ class Auth
       $this->isLogin = false;
     }
   
-  	public function attempt($email, $password): bool
+  	public function attempt($name, $password): bool
     {
-      $u = User::where('email',$email)->first();
+      //cek if email or username is registered
+      $user = User::where('email',$name)
+        		->orWhere('username',$name)
+        		->first();
       
-      if(!$u)
+      if(!$user)
       {
         return false;
       }
       
-      if(password_verify($password,$u->password))
+      if(password_verify($password,$user->password))
       {
         $setSession = [
-        	'user' => $u->id,
-          	'level' => $u->role,
+        	'user' => $user->id,
+          	'level' => $user->role,
           	'logged_in' => true
         ];
         

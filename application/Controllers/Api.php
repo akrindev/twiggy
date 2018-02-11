@@ -22,17 +22,21 @@ class Api extends Controller
       $this->auth = new Auth;
       
     }
+  
+  
   	function index(){
       session()->start();
     	print_r(session('user'));
   	}
+  
+  
   	public function login()
     {
       
       $validate = $this->validate([
       	'email' => [
         	'label' => 'Email',
-            'rules' => 'required|valid_email'
+            'rules' => 'required'
         ],
         'password' => [
         	'label' => 'password',
@@ -123,6 +127,7 @@ class Api extends Controller
   
   	public function ask()
     {
+      helper('text');
       
       if(!$this->auth->isLogin())
       {
@@ -151,6 +156,7 @@ class Api extends Controller
       $topic = $this->request->getPost('topic');
       $body = esc($this->request->getPost('body'));
       $tags = esc($this->request->getPost('tags'));
+      $slug = strtolower( url_title(convert_accented_characters($topic).'-'.rand(00000,99999)));
       
       if($validate)
       {
@@ -158,7 +164,7 @@ class Api extends Controller
       	$discuss->user_id = session('user');
       	$discuss->topic = $topic;
       	$discuss->body = \Michelf\MarkdownExtra::defaultTransform($body);
-        $discuss->slug = url_title($topic.'-'.rand(00000,99999));
+        $discuss->slug = $slug;
         $discuss->tags = $tags;
         
       	$discuss->save();
@@ -200,7 +206,7 @@ class Api extends Controller
       {
         $comment = new \App\Models\Comment;
         $comment->user_id = session('user');
-        $comment->parent_id = $this->request->getPost('parent');
+        $comment->discuss_id = $this->request->getPost('parent');
         $comment->body = esc($this->request->getPost('body'));
         $comment->save();
         
