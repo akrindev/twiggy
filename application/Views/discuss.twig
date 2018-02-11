@@ -6,13 +6,13 @@
   <div class="wrapper">
     <div class="container">
       <div class="row">
-        <div class="col-md-12" style="color:#fff"><div class="container hero">
+        <div style="color:#fff"><div class="container hero">
 		<strong>Welcome to twiggy</strong>
 		<br/>
 		<small> Twiggy adalah forum komunitas introvert indonesia</small>
 	  </div>
-      
-        <a href="/tanya" style="padding:5px 15px;color#fff;background:#3541b5;color:#fff;margin-top:10px">tanya</a>
+      <div class="separator" style="margin:10px"></div>
+        <a href="/tanya" style="padding:5px 15px;color#fff;background:#3541b5;color:#fff;margin-top:10px">post discussion</a>
         </div>
       
       <div class="col-md-12">
@@ -23,8 +23,10 @@
           
           <div class="topics"><a href="/topic/{{ discuss.slug }}">
             {{ discuss.topic|raw }}
-            <span class="meta-time">{{ discuss.user.username }} . {{ discuss.created_at }}</span>
-             {{ tags(discuss.tags)|raw }} 
+            <span class="meta-time"><span class="glyphicon glyphicon-user"></span> {{ discuss.user.username }} . <span class="glyphicon glyphicon-time"></span> {{ discuss.created_at }}</span>
+          {% if discuss.tags != '' %}
+            {{ tags(discuss.tags)|raw }}
+           {% endif %}
             </a>
           </div>
           {% endfor %}

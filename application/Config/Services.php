@@ -25,20 +25,20 @@ class Services extends CoreServices
 	   $twig->addExtension(new \Aptoma\Twig\Extension\MarkdownExtension($engine));
        
        $auth = new \Twig_Function('auth', function($u=null) {
-       $isauth = new \App\Auth\Auth;
-       
-       if(!is_null($u))
-       {
-         return $isauth->getUser();
-       }
-         
-         
-       if($isauth->isLogin())
-       {
-         return true;
-       } else {
-         return false;
-       }
+           $isauth = new \App\Auth\Auth;
+
+           if(!is_null($u))
+           {
+             return $isauth->getUser();
+           }
+
+
+           if($isauth->isLogin())
+           {
+             return true;
+           } else {
+             return false;
+           }
          
        });
      

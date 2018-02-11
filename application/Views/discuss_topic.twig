@@ -7,6 +7,7 @@
 <div class="wrapper">
 <section class="section">
 	  <div class="container hero">
+        <div style="float:left;padding:5px 8px;background:rgba(255,255,255,0.3);border-radius:50%;margin-right:10px;"><a style="color:#fff;" href="/"><span class="glyphicon glyphicon-chevron-left"></span></a></div>
         <strong> {{ discus.topic }} </strong>
 	  </div>
       
@@ -21,7 +22,7 @@
 	<img data-name="{{ discus.user.name }}" class="avatar" width=30 height=30>
 	  <strong>{{ discus.user.name }} </strong> <small class="text-muted">@{{ discus.user.username }} </small>
 		<br/>
-		  <small class="text-muted">{{ discus.created_at }} {% if auth('user') == discus.user_id %} . <a href="/discuss/{{ discus.slug }}/edit">edit</a> {% endif %} </small>
+		  <small class="text-muted"><span class="glyphicon glyphicon-time"></span> {{ discus.created_at }} {% if auth('user') == discus.user_id %} . <a href="/discuss/{{ discus.slug }}/edit">edit</a> {% endif %} </small>
 		</div>
 	  
 	  
@@ -34,8 +35,10 @@
         
 	  </div>
 	  
-  {% if comments %}
 	  <div class="comments">
+        
+  {% if comments.count > 0 %}
+        
       {% for comment in comments %}
 		
 		<div class="comment">
@@ -44,7 +47,7 @@
 			  <img data-name="{{ comment.user.name}}" class="avatar" width=30 height=30>
 			  <strong>{{ comment.user.name }} </strong> <small class="text-muted">@{{ comment.user.username }} </small>
 			  <br/>
-			  <small class="text-muted">{{ comment.created_at }} </small>
+			  <small class="text-muted"><span class="glyphicon glyphicon-time"></span> {{ comment.created_at }} {% if comment.user.id == auth('user') %}. <a href="/comment/{{ comment.id }}/edit">edit</a> {% endif %} </small>
 			</div>
 		  </div>
 		  <div class="comment-body">
@@ -59,8 +62,9 @@
 		</div>
 	 
         {% endfor %}
-	  </div>
+      
   {% endif %}
+	  </div>
   
 	  <div style="margin-left:10px;">
 		<ul class="pagination pagination-sm">
